@@ -19,7 +19,7 @@ There are 3 test, the original one given and 2 additional test added. Please see
 
 ## Brief -> Approach
 
-I decided to break up this problem into several functions, 3 parts. The first are more of the core functions, that are responsible for taking in the error message and transforming it. The second act as iterator for Map & List whose nested structures are to be transformed. Lastly, the third also acts as an iterator for Map & List whose nested structures are to be kept; this is determined by the additional arguments (keys) provided.
+I decided to break up this problem into several functions, 3 parts. The first are more of the core functions, that are responsible for taking in the error message and transforming it. The second act as iterator for Map & List whose nested structures are to be transformed. Lastly, the third also acts as an iterator for Map & List whose nested structures are to be kept; this is determined by the additional arguments (keys) provided. I did not use let, const, or var in my functions as requested. The only time I used it was to require ImmutableJS, Mocha, and to seperate my functions into different files. Please read below for more details.
 
 ### transform-error-functions -> takes in the error message + key parameters and tansforms the errors
 ### Start with concatenateErrorMessages

@@ -15,8 +15,8 @@ it('should concatenate all errors', () => {
     assert.deepEqual(result.toJS(), {
         name: 'This field is required. Another error.',
         age: 'Only numeric characters are allowed.'
-    })
-})
+    });
+});
 it('should concatenate all deep nested errors', () => {
     const error = Immutable.fromJS({
         name: {
@@ -32,8 +32,8 @@ it('should concatenate all deep nested errors', () => {
     assert.deepEqual(result.toJS(), {
         name: 'Only alphanumeric characters are allowed.',
         names: 'Only alphanumeric characters are allowed.',
-    })
-})
+    });
+});
 it('should tranform errors', () => {
     // example error object returned from API converted to Immutable.Map
     const errors = Immutable.fromJS({

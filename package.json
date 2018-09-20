@@ -1,0 +1,23 @@
+{
+  "name": "transform-errors",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha solution/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesThomasEdwards/transform-errors.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamesThomasEdwards/transform-errors/issues"
+  },
+  "homepage": "https://github.com/JamesThomasEdwards/transform-errors#readme",
+  "dependencies": {
+    "immutable": "^3.8.2",
+    "mocha": "^5.2.0"
+  }
+}

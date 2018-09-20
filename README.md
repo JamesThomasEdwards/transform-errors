@@ -10,20 +10,19 @@
 
 ## Test -> Mocha
 
-There are two additional test included in the solution folder -> test.js file
+There are 3 test, the original one given and 2 additional test added. Please see the solution folder -> test.js file. 
+
 
 ### To Run Test
 
 1. ``` npm run test ```
 
-## Brief
+## Brief -> Approach
 
-I decided to break up this problem into several functions. Besides the first 3 which are 
-responsible for taking in the error message + multiple arguments, constructing the 
-transformed Map, and removing duplicates, the others either take in a Map or List and act as iterators
-with the expection of List which concatenates error messages on non-nested request. 
+I decided to break up this problem into several functions. The first are more of the core functions, that are responsible for taking in the error message and transforming it. The others either take in a Map or List and 
+essentially act as iterators. Please see function list below.
 
-### Core functions - takes in error message + key parameters
+### Core functions - takes in the error message + key parameters and tansforms the errors
 
 * concatenateErrorMessages - takes in error Map and additional arguments
 * createNewErrorMap - constructs the new Map

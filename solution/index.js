@@ -1,47 +1,29 @@
 const Immutable = require('immutable');
 
-let error = Immutable.fromJS({
-    name: ['This field is required'],
-    age: ['This field is required', 'Only numeric characters are allowed'],
-    urls: [{}, {}, {
-        site: {
-            code: ['This site code is invalid'],
-            id: ['Unsupported id'],
-        }
-    }],
-    url: {
-        site: {
-            code: ['This site code is invalid'],
-            id: ['Unsupported id'],
-        }
-    },
-    tags: [{}, {
-        non_field_errors: ['Only alphanumeric characters are allowed'],
-        another_error: ['Only alphanumeric characters are allowed'],
-        third_error: ['Third error']
-    }, {}, {
-        non_field_errors: [
-            'Minumum length of 10 characters is required',
-            'Only alphanumeric characters are allowed',
-        ],
-    }],
-    tag: {
-        nested: {
-            non_field_errors: ['Only alphanumeric characters are allowed'],
-        },
-    },
-});
-// start here with the error message and possible keys in the perameter;
-function concatenateErrorMessages(errorMap, ...args) {
-    // return createNewErrorMap with errorMap and additional arguments
-    // as an array
-    return createNewErrorMap(errorMap, [...args]);
+// start here with the error message and possible keys in the parameter;
+function concatenateErrorMessages(
+    errorMap,
+    ...args
+) {
+    // return createNewErrorMap with errorMap and additional arguments;
+    // as an array;
+    return createNewErrorMap(
+        errorMap,
+        [...args],
+    );
 }
-function createNewErrorMap(errorMap, args, keys, len = 0, newMap = Immutable.Map(), start = 0) {
-    // makes an array of keys
+function createNewErrorMap(
+    errorMap,
+    args,
+    keys,
+    len = 0,
+    newMap = Immutable.Map(),
+    start = 0,
+) {
+    // makes an array of keys;
     keys = errorMap.keySeq().toArray();
     len = keys.length;
-    // base case
+    // base case;
     if (start === len) {
         // concatenated errors;
         return newMap;
@@ -73,16 +55,30 @@ function createNewErrorMap(errorMap, args, keys, len = 0, newMap = Immutable.Map
                 .join('. ') + '.');
     }
     // increment start every recursive call
-    return createNewErrorMap(errorMap, args, keys, len, newMap, start + 1);
+    return createNewErrorMap(
+        errorMap,
+        args,
+        keys,
+        len,
+        newMap,
+        start + 1,
+    );
 }
-
-console.dir(concatenateErrorMessages(error, 'url', 'urls').toJS(), { depth: null });
 
 function removeDuplicates(arr) {
-    return arr.filter((ele, i) => arr.indexOf(ele) === i && ele !== '');
+    return arr
+        .filter((ele, i) => arr
+            .indexOf(ele) === i && ele !== '');
 }
 
-function isMapVal(errorMap, keys, len, start = 0, str = '') {
+function isMapVal(
+    errorMap,
+    keys,
+    len,
+    start = 0,
+    str = '',
+) {
+
     if (start === 0) {
         // makes array of keys;
         keys = errorMap.keySeq().toArray();
@@ -101,11 +97,23 @@ function isMapVal(errorMap, keys, len, start = 0, str = '') {
         // then recursively iterate;
         str += isListVal(errorMap.get(keys[start]));
         // increment start every recursive call
-        return isMapVal(errorMap, keys, len, start + 1, str);
+        return isMapVal(
+            errorMap,
+            keys,
+            len,
+            start + 1,
+            str,
+        );
     }
 }
 
-function isListVal(errorList, len = 0, start = 0, str = '') {
+function isListVal(
+    errorList,
+    len,
+    start = 0,
+    str = '',
+) {
+
     len = errorList.size;
     // base case
     if (start === len) {
@@ -115,17 +123,33 @@ function isListVal(errorList, len = 0, start = 0, str = '') {
     if (typeof errorList.get(start) === 'string') {
         str += errorList.get(start) + '.';
         // increment start every recursive call
-        return isListVal(errorList, len, start + 1, str);
+        return isListVal(
+            errorList,
+            len,
+            start + 1,
+            str,
+        );
     } else {
         // if element is a Map, add the output of isMapVal to str;
         // keep iterating recrusively;
         str += isMapVal(errorList.get(start));
         // increment start every recursive call
-        return isListVal(errorList, len, start + 1, str);
+        return isListVal(
+            errorList,
+            len,
+            start + 1,
+            str,
+        );
     }
 }
 
-function isMapKeepNest(errorMap, keys, len, start = 0) {
+function isMapKeepNest(
+    errorMap,
+    keys,
+    len,
+    start = 0,
+) {
+
     if (start === 0) {
         // makes an array of keys;
         keys = errorMap.keySeq().toArray();
@@ -142,7 +166,12 @@ function isMapKeepNest(errorMap, keys, len, start = 0) {
         errorMap = errorMap.set(keys[start],
             isMapKeepNest(errorMap.get(keys[start])));
         // increment start every recursive call
-        return isMapKeepNest(errorMap, keys, len, start + 1);
+        return isMapKeepNest(
+            errorMap,
+            keys,
+            len,
+            start + 1,
+        );
     } else {
         // if value is a List set errorMap at current key, with value as;
         // output of isListKeepNest;
@@ -151,13 +180,25 @@ function isMapKeepNest(errorMap, keys, len, start = 0) {
             isListKeepNest(errorMap.get(keys[start]))
                 .join(' '));
         // increment start every recursive call
-        return isMapKeepNest(errorMap, keys, len, start + 1);
+        return isMapKeepNest(
+            errorMap,
+            keys,
+            len,
+            start + 1,
+        );
     }
 
 }
 
-function isListKeepNest(errorList, len, start = 0, str = '') {
+function isListKeepNest(
+    errorList,
+    len,
+    start = 0,
+    str = '',
+) {
+
     len = errorList.size;
+
     if (start === len) {
         return errorList;
     }
@@ -168,7 +209,11 @@ function isListKeepNest(errorList, len, start = 0, str = '') {
         str = errorList.get(start) + '.';
         errorList = errorList.set(start, str);
         // increment start every recursive call
-        return isListKeepNest(errorList, len, start + 1);
+        return isListKeepNest(
+            errorList,
+            len,
+            start + 1,
+        );
     } else {
         // if List element is a Map, set the output of isMapKeepNest;
         // to the start index of errorList;
@@ -176,8 +221,13 @@ function isListKeepNest(errorList, len, start = 0, str = '') {
         errorList = errorList.set(start,
             isMapKeepNest(errorList.get(start)));
         // increment start every recursive call
-        return isListKeepNest(errorList, len, start + 1);
+        return isListKeepNest(
+            errorList,
+            len,
+            start + 1,
+        );
     }
 
 }
+
 module.exports = concatenateErrorMessages

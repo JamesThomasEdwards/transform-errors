@@ -1,6 +1,8 @@
+
 const Immutable = require('immutable');
 const assert = require('assert');
-const concatenateErrorMessages = require('./index');
+
+const concatenateErrorMessages = require('./core-functions/createNewErrorMap');
 
 
 function transformErrors() {

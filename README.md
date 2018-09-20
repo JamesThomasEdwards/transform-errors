@@ -3,7 +3,7 @@
 ## Instructions
 
 
-1. ``` cd rest-api-test ```
+1. ``` cd transform-errors ```
 
 2. ``` npm install ```
 
@@ -20,9 +20,10 @@ There are two additional test included in the solution folder -> test.js file
 
 I decided to break up this problem into several functions. Besides the first 3 which are 
 responsible for taking in the error message + multiple arguments, constructing the 
-transformed Map, and removing duplicates, the others either take in a Map or List. 
+transformed Map, and removing duplicates, the others either take in a Map or List and act as iterators
+with the expection of List which concatenates error messages on non-nested request. 
 
-### Takes in error message + key parameters
+### Core functions - takes in error message + key parameters
 
 * concatenateErrorMessages - takes in error Map and additional arguments
 * createNewErrorMap - constructs the new Map

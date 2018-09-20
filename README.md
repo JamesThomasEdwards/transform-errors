@@ -21,7 +21,7 @@ There are 3 test, the original one given and 2 additional test added. Please see
 
 I decided to break up this problem into several functions, 3 parts. The first are more of the core functions, that are responsible for taking in the error message and transforming it. The second act as iterator for Map & List whose nested structures are to be transformed. Lastly, the third also acts as an iterator for Map & List whose nested structures are to be kept; this is determined by the additional arguments (keys) provided.
 
-### core-functions -> takes in the error message + key parameters and tansforms the errors
+### transform-error-functions -> takes in the error message + key parameters and tansforms the errors
 
 * concatenateErrorMessages - takes in error Map and additional arguments
 * createNewErrorMap - constructs the new Map
